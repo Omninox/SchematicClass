@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/Omninox/SchematicClass/branch/master/graph/badge.svg)](https://codecov.io/gh/Omninox/SchematicClass) [![CircleCI](https://circleci.com/gh/Omninox/SchematicClass.svg?style=svg)](https://circleci.com/gh/Omninox/SchematicClass)
+
 # SchematicClass
 SchematicClass is a way to build your mongoose schemas and models using native classes.  Additionally, SchematicClass extends mongoose's native discriminators to support multilevel discriminators (inheritance).
 

@@ -1,0 +1,74 @@
+version: 2.1
+
+references:
+  container_config: &container_config
+    docker:
+      - image: circleci/node:10
+  restore_dep_cache: &restore_dep_cache
+    restore_cache:
+      keys:
+        - {{ .Environment.CIRCLE_PROJECT_REPONAME }}-dependencies-{{ .Branch }}-{{ checksum "package.json" }}
+  filter_any: &filter_any
+    filters:
+      tags:
+        only: /.*/
+  filter_master: &filter_master
+    filters:
+      branches:
+        only: master
+
+orbs:
+  codecov: codecov/codecov@1.0.5
+
+jobs:
+  dependencies:
+    <<: *container_config
+    steps:
+      - checkout
+      - *restore_dep_cache
+      - run:
+          name: Configure NPM Credentials
+          command: |
+            echo "_auth=$(NPM_TOKEN)" >> ~/.npmrc
+            echo "email=$(NPM_EMAIL)" >> ~/.npmrc
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - save_cache:
+          key: {{ .Environment.CIRCLE_PROJECT_REPONAME }}-dependencies-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+            - ~/.npm
+  test:
+    <<: *container_config
+    steps:
+      - checkout
+      - *restore_dep_cache
+      - run:
+          name: Test
+          command: npm test
+      - codecov/upload:
+          file: coverage/coverage-final.json
+  publish:
+    <<: *container_config
+    steps:
+      - checkout
+      - *restore_dep_cache
+      - run:
+          name: Publish
+          command: npm publish
+
+workflow:
+  version: 2
+  default:
+    jobs:
+      - dependencies:
+          <<: *filter_any
+      - test:
+          requires:
+            - dependencies
+          <<: *filter_any
+      - publish:
+          requires:
+            - test
+          <<: *filter_master

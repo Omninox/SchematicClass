@@ -7,7 +7,7 @@ references:
   restore_dep_cache: &restore_dep_cache
     restore_cache:
       keys:
-        - {{ .Environment.CIRCLE_PROJECT_REPONAME }}-dependencies-{{ .Branch }}-{{ checksum "package.json" }}
+        - v1-{{ .Environment.CIRCLE_PROJECT_REPONAME }}-dependencies-{{ .Branch }}-{{ checksum "package.json" }}
   filter_any: &filter_any
     filters:
       tags:

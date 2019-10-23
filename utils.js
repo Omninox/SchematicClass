@@ -14,8 +14,8 @@ exports.instanceOf = function instanceOf(obj, Constructor) {
   return !!(
     obj instanceof Constructor ||
     obj instanceof Constructor.__class ||
-    obj.__class.prototype instanceof Constructor.__class ||
     obj.__class === Constructor.__class ||
+    obj.__class.prototype instanceof Constructor.__class ||
     (
       obj.__class.__inherits &&
       instanceOf(obj.__class.__inherits.prototype, Constructor)

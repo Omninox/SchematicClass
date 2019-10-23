@@ -21,7 +21,7 @@ SchematicClass works by looking at static properties on the provided class to bu
 | `__pre` | `{ [ eventName: string ]: (...args: any[]) => any }` | `false` |  The prehooks to define on the schema. |
 | `__post` | `{ [ eventName: string ]: (...args: any[]) => any }` | `false` |  The posthooks to define on the schema. |
 | `__virtuals` | `{ [ virtualName: string ]: { get?: () => any, set?: (val: any) => void } }` | `false` |  The virtuals to define for this class.  Virtuals are generally discouraged when using SchematicClass as it requires duplication of code (you must define a getter and setter twice, once for the Model and once for the class).  Instead, you can use an instance method to get a similar effect. |
-| `__foreignKeys` | `{ [ foreignKeyName: string ]: { ref: string &#124; Model, localField: string &#124; (() => string), foreignField: string &#124; (() => string), justOne?: boolean, count?: boolean } }` | `false` |  Foreign keys to define on the schema.  Foreign keys in mongoose can be used to populate documents based on values other than the `_id` field.  See the mongoose documentation for further information. |
+| `__foreignKeys` | <code>{ [ foreignKeyName: string ]: { ref: string &#124; Model, localField: string &#124; (() => string), foreignField: string &#124; (() => string), justOne?: boolean, count?: boolean } }</code> | `false` |  Foreign keys to define on the schema.  Foreign keys in mongoose can be used to populate documents based on values other than the `_id` field.  See the mongoose documentation for further information. |
 | `__queryHelpers` | `{ [ queryName: string ]: (this: Model, ...args: any[]) => DocumentQuery }` | `false` | Defines a mongoose query helper on the schema. |
 
 ## Inheritable Properties

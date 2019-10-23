@@ -36,7 +36,7 @@
     "sinon": "^7.5.0"
   },
   "dependencies": {
-    "mongoose": "^5.5.1"
+    "mongoose": "^5.7.5"
   },
   "nyc": {
     "all": true,

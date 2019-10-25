@@ -29,6 +29,7 @@ jobs:
       - run:
           name: Configure NPM Credentials
           command: |
+            echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
             echo "_auth=$(NPM_TOKEN)" >> ~/.npmrc
             echo "email=$(NPM_EMAIL)" >> ~/.npmrc
       - run:

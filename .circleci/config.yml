@@ -27,10 +27,6 @@ jobs:
       - checkout
       - *restore_dep_cache
       - run:
-          name: Configure NPM Credentials
-          command: |
-            echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
-      - run:
           name: Install Dependencies
           command: npm install
       - save_cache:
@@ -53,6 +49,10 @@ jobs:
     steps:
       - checkout
       - *restore_dep_cache
+      - run:
+          name: Configure NPM Credentials
+          command: |
+            echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
       - run:
           name: Publish
           command: npm publish

@@ -58,7 +58,7 @@ jobs:
           name: Publish
           command: npm publish
 
-workflow:
+workflows:
   version: 2
   default:
     jobs:

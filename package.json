@@ -1,6 +1,6 @@
 {
   "name": "mongo-schematic-class",
-  "version": "0.0.0",
+  "version": "1.0.1",
   "description": "Mongoose Schema builder for ES6 classes that supports multilevel inheritance.",
   "main": "index.js",
   "scripts": {

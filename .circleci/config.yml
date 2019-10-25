@@ -17,8 +17,8 @@ references:
       branches:
         only: master
 
-orbs:
-  codecov: codecov/codecov@1.0.5
+# orbs:
+#   codecov: codecov/codecov@1.0.5
 
 jobs:
   dependencies:
@@ -47,8 +47,8 @@ jobs:
       - run:
           name: Test
           command: npm test
-      - codecov/upload:
-          file: coverage/coverage-final.json
+      # - codecov/upload:
+      #     file: coverage/coverage-final.json
   publish:
     <<: *container_config
     steps:

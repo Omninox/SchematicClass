@@ -7,7 +7,7 @@ references:
   restore_dep_cache: &restore_dep_cache
     restore_cache:
       keys:
-        - v1-{{ .Environment.CIRCLE_PROJECT_REPONAME }}-dependencies-{{ .Branch }}-{{ checksum "package.json" }}
+        - v2-{{ .Environment.CIRCLE_PROJECT_REPONAME }}-dependencies-{{ .Branch }}-{{ checksum "package.json" }}
   filter_any: &filter_any
     filters:
       tags:
@@ -27,14 +27,10 @@ jobs:
       - checkout
       - *restore_dep_cache
       - run:
-          name: Configure NPM Credentials
-          command: |
-            echo "//registry.npmjs.org/:_authToken=$(NPM_TOKEN)" >> ~/.npmrc
-      - run:
           name: Install Dependencies
           command: npm install
       - save_cache:
-          key: v1-{{ .Environment.CIRCLE_PROJECT_REPONAME }}-dependencies-{{ .Branch }}-{{ checksum "package.json" }}
+          key: v2-{{ .Environment.CIRCLE_PROJECT_REPONAME }}-dependencies-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
             - ./node_modules
             - ~/.npm
@@ -53,6 +49,10 @@ jobs:
     steps:
       - checkout
       - *restore_dep_cache
+      - run:
+          name: Configure NPM Credentials
+          command: |
+            echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
       - run:
           name: Publish
           command: npm publish

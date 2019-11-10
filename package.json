@@ -1,6 +1,6 @@
 {
   "name": "mongo-schematic-class",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Mongoose Schema builder for ES6 classes that supports multilevel inheritance.",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,8 @@
     "class",
     "es6",
     "multilevel",
-    "inheritance"
+    "inheritance",
+    "discriminator"
   ],
   "author": "Calvin Moore (c1moore@outlook.com)",
   "license": "MIT",

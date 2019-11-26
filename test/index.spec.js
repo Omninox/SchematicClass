@@ -692,5 +692,15 @@ describe('SchematicClass', () => {
       Sinon.assert.calledOnce(model);
       Sinon.assert.calledWith(model, 'SchematicTest');
     });
+
+    it(`should throw an error if the root class isn't a SchematicClass`, () => {
+      const root = { __context: {} };
+      const parent = { __context: {}, __inherits: root };
+      const child = { __context: {}, __schema: {}, __inherits: parent };
+
+      should.throws(() => {
+        createModel(child, 'Child');
+      }, 'Model must be created for root class before creating a model for the subclass.');
+    });
   });
 });

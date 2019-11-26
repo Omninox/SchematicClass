@@ -87,6 +87,10 @@ exports.createModel = function createModel(SchematicClass, modelName) {
     rootClass = rootClass.__inherits;
   }
 
+  if (!rootClass || !rootClass.__model) {
+    throw new Error('Model must be created for root class before creating a model for the subclass.');
+  }
+
   SchematicClass.__model = rootClass.__model.discriminator(name, SchematicClass.__schema);
 
   return SchematicClass.__model;
